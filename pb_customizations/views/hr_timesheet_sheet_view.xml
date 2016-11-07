@@ -1,0 +1,67 @@
+<?xml version ="1.0" encoding="utf-8"?>
+
+<odoo>
+	<record id="hr_timesheet_sheet_form" model="ir.ui.view">
+		<field name="name">hr_timesheet_sheet</field>
+		<field name="model">hr_timesheet_sheet.sheet</field>
+		<field name="inherit_id" ref="hr_timesheet_sheet.hr_timesheet_sheet_form" />
+		<field name="arch" type="xml">
+			<form position="attributes">
+				<attribute name="create">false</attribute>
+			</form>
+			<xpath expr="//field[@name='message_follower_ids']" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</xpath>
+			<xpath expr="//field[@name='message_ids']" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</xpath>
+		</field>
+	</record>
+	<record id="hr_timesheet_sheet_tree_simplified" model="ir.ui.view">
+		<field name="name">hr_timesheet_sheet</field>
+		<field name="model">hr_timesheet_sheet.sheet</field>
+		<field name="inherit_id"
+			ref="hr_timesheet_sheet.hr_timesheet_sheet_tree_simplified" />
+		<field name="arch" type="xml">
+			<tree position="attributes">
+				<attribute name="create">false</attribute>
+			</tree>
+		</field>
+	</record>
+	<record id="act_hr_timesheet_sheet_my_timesheets" model="ir.actions.act_window">
+		<field name="name">My Timesheets</field>
+		<field name="res_model">hr_timesheet_sheet.sheet</field>
+		<field name="view_type">tree</field>
+		<field name="view_mode">tree</field>
+		<field name="domain">[('1','=','1')]</field>
+	</record>
+	
+	<record id="hr_timesheet_sheet.menu_act_hr_timesheet_sheet_my_timesheets"
+	model="ir.ui.menu">
+		<field name="groups_id" eval="[(6, 0, [ref('make_invisible')] )]" />
+	</record>
+	
+	<record id="hr_timesheet_line_tree" model="ir.ui.view">
+        <field name="name">account.analytic.line.tree</field>
+        <field name="model">account.analytic.line</field>
+		<field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree" />
+		<field name="arch" type="xml">
+			<tree position="attributes">
+				<attribute name="create">false</attribute>
+			</tree>
+		</field>
+	</record>
+	<record id="hr_timesheet_line_form" model="ir.ui.view">
+        <field name="name">account.analytic.line.form</field>
+        <field name="model">account.analytic.line</field>
+		<field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_form" />
+		<field name="arch" type="xml">
+			<form position="attributes">
+				<attribute name="create">false</attribute>
+				<attribute name="edit">false</attribute>
+				<attribute name="delete">false</attribute>
+			</form>
+		</field>
+	</record>
+
+</odoo>    

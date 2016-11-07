@@ -1,0 +1,49 @@
+<?xml version ="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="project.view_task_search_form" model="ir.ui.view">
+		<field name="name">project.task.search.form</field>
+		<field name="model">project.task</field>
+		<field name="arch" type="xml">
+			<search string="Tasks">
+				<field name="name" string="Tasks" />
+				<field name="partner_id" />
+				<field name="user_id" />
+			</search>
+		</field>
+	</record>
+	<record id="view_res_partner_filter" model="ir.ui.view">
+            <field name="name">res.partner.select</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <search string="Search Partner">
+                   <field name="name"
+                       filter_domain="['|','|',('display_name','ilike',self),('ref','=',self),('email','ilike',self)]"/>
+    			</search>
+		</field>
+	</record>
+	<record id="mail.action_contacts" model="ir.actions.act_window">
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="pb_customizations.view_res_partner_filter"/>
+        <field name="domain">[("customer", "=", 1)]</field>
+    </record>
+    	
+	<record id="hr.view_employee_filter" model="ir.ui.view">
+            <field name="name">Employees</field>
+            <field name="model">hr.employee</field>
+            <field name="arch" type="xml">
+                <search string="Employees">
+                    <field name="name" string="Employees" filter_domain="['|',('work_email','ilike',self),('name','ilike',self)]"/>
+                </search>
+             </field>
+     </record>
+     <record id="hr_timesheet.hr_timesheet_line_search" model="ir.ui.view">
+            <field name="name">account.analytic.line.search</field>
+            <field name="model">account.analytic.line</field>
+            <field name="arch" type="xml">
+                <search string="Timesheet">
+                	<field name="date"/>
+                    <field name="user_id"/>
+                </search>
+            </field>
+        </record>
+</odoo>

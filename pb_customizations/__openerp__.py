@@ -1,0 +1,36 @@
+{
+    'name': "PB Customizations",
+
+    'summary': """
+        This module is used to customize the project""",
+
+    'version': '9.0.1.0.0',
+    'category': 'project',
+    'website': 'http://74.208.86.31/',
+    'author': 'BusinessERPWeb <businesserpweb@gmail.com>',
+    'application': False,
+    'installable': True,
+    'depends': ['project', 
+                'project_timesheet',
+                'hr',
+                'hr_timesheet',
+                'hr_attendance',
+                'hr_timesheet_sheet', 
+                'account',
+                'account_accountant'],
+    'data': [
+        "security/ir.model.access.csv",
+        "security/main_menu_invisible_view.xml",
+            "views/hr_timesheet_sheet_view.xml",
+            "views/project_view.xml",
+            "views/hr_employe_view.xml",
+            "views/hr_attendance_view.xml",
+            "views/main_sub_menu.xml",
+            "views/partner_view.xml",
+            "views/vechicle_view.xml",
+            "views/res_user_view.xml",
+            "views/pb_search_view.xml",
+             ],
+    'demo': [],
+    'qweb': [],
+}

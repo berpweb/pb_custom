@@ -1,0 +1,87 @@
+<?xml version ="1.0" encoding="utf-8"?>
+
+<odoo>
+	<record id="hr.view_employee_tree" model="ir.ui.view">
+            <field name="name">hr.employee.tree</field>
+            <field name="model">hr.employee</field>
+            <field name="arch" type="xml">
+                <tree string="Employees">
+                    <field name="name"/>
+                    <field name="mobile_phone"/>
+                    <field name="work_email"/>
+                    <field name="coach_id" invisible="1"/>
+                    <field name="message_needaction" invisible="1"/>
+                </tree>
+            </field>
+    </record>
+	<record id="view_employee_form" model="ir.ui.view">
+		<field name="name">hr.employee.form</field>
+		<field name="model">hr.employee</field>
+		<field name="inherit_id" ref="hr.view_employee_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//button[@name='toggle_active']" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</xpath>
+			<xpath
+				expr="//notebook/page[@name='public']"
+				position="attributes">
+				<attribute name="invisible">1</attribute>
+			</xpath>
+			<xpath expr="//notebook/page[@name='public']/group//field[@name='department_id']/.."
+				position="attributes">
+				<attribute name="invisible">1</attribute>
+			</xpath>
+			<xpath
+				expr="//notebook/page[@name='public']/group/group/field[@name='address_id']"
+				position="attributes">
+				<attribute name="invisible">1</attribute>
+			</xpath>
+			<xpath
+				expr="//notebook/page[@name='public']/group/group/field[@name='work_location']"
+				position="attributes">
+				<attribute name="invisible">1</attribute>
+			</xpath>
+			<xpath
+				expr="//notebook/page[@name='public']/group/group/field[@name='work_phone']"
+				position="attributes">
+				<attribute name="invisible">1</attribute>
+			</xpath>
+			<xpath
+				expr="//notebook/page[@name='public']/group/group/field[@name='mobile_phone']"
+				position="attributes">
+				<attribute name="string">Mobile</attribute>
+			</xpath>
+			<xpath
+				expr="//notebook/page[@name='public']/group/group/field[@name='work_email']"
+				position="attributes">
+				<attribute name="string">Email</attribute>
+			</xpath>
+			<field name="user_id" position="replace" />
+			<xpath
+				expr="//field[@name='work_email']" position="after">
+					<field name="user_id" required="1" />
+			</xpath>
+			<xpath expr="//notebook/page[2]" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</xpath>
+			<xpath expr="//notebook/page[3]" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</xpath>
+			<xpath expr="//field[@name='message_follower_ids']" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</xpath>
+			<xpath expr="//field[@name='message_ids']" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</xpath>
+			<xpath expr="//field[@name='category_ids']" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</xpath>
+		</field>
+	</record>
+	<record id="hr.open_view_employee_list_my" model="ir.actions.act_window">
+            <field name="name">Employees</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+     </record>
+</odoo>

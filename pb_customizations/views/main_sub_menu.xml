@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="account.menu_finance" model="ir.ui.menu">
+			<field name="groups_id"
+				eval="[(6,False,[ref('pb_customizations.make_invisible')])]" />
+		</record>
+		<record id="mail.mail_channel_menu_root_chat" model="ir.ui.menu">
+			<field name="groups_id" eval="[(6,False,[ref('make_invisible')])]" />
+		</record>
+		<record id="base.menu_base_partner" model="ir.ui.menu">
+			<field name="groups_id" eval="[(6,False,[ref('make_invisible')])]" />
+		</record>
+		<record id="base.menu_management" model="ir.ui.menu">
+			<field name="groups_id" eval="[(6,False,[ref('make_invisible')])]" />
+		</record>
+		<record model="ir.ui.menu" id="project.menu_project_management">
+			<field name="name">Task Details</field>
+		</record>
+		<record id="project.menu_projects" model="ir.ui.menu">
+			<field name="groups_id" eval="[(6,False,[ref('make_invisible')])]" />
+		</record>
+		<record id="project.menu_action_view_task_history_cumulative"
+			model="ir.ui.menu">
+			<field name="groups_id" eval="[(6,False,[ref('make_invisible')])]" />
+		</record>
+		<record id="hr.menu_human_resources_configuration" model="ir.ui.menu">
+			<field name="groups_id" eval="[(6,False,[ref('make_invisible')])]" />
+		</record>
+		<record id="hr.menu_hr_department_tree" model="ir.ui.menu">
+			<field name="groups_id" eval="[(6,False,[ref('make_invisible')])]" />
+		</record>
+		<record
+			id="hr_timesheet_sheet.menu_act_hr_timesheet_sheet_form_my_current"
+			model="ir.ui.menu">
+			<field name="groups_id" eval="[(6,False,[ref('make_invisible')])]" />
+		</record>
+		<record id="hr_timesheet_sheet.menu_act_hr_timesheet_sheet_form"
+			model="ir.ui.menu">
+			<field name="groups_id" eval="[(6,False,[ref('make_invisible')])]" />
+		</record>
+		<record id="hr_attendance.timesheet_menu_root"
+			model="ir.ui.menu">
+			<field name="groups_id" eval="[(6,False,[ref('make_invisible')])]" />
+		</record>
+		<record model="ir.ui.menu" id="mail.menu_contacts">
+			<field name="name">Customers Management</field>
+			<field name="sequence">10</field>
+		</record>
+		<record model="ir.ui.menu" id="base.menu_main_pm">
+			<field name="name">Tasks Management</field>
+			<field name="sequence">7</field>
+		</record>
+		<record model="ir.ui.menu" id="hr.menu_hr_root">
+			<field name="name">Employees Management</field>
+			<field name="sequence">15</field>
+		</record>
+		<menuitem id="menu_employee_details" parent="hr.menu_hr_root" name="Employee Details"/>
+		<menuitem action="hr.open_view_employee_list_my" id="hr.menu_open_view_employee_list_my" 
+				string="Employees" parent="menu_employee_details"/>
+	</data>
+
+</odoo>
