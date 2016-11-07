@@ -1,0 +1,7 @@
+<?xml version ="1.0" encoding="utf-8"?>
+<odoo>
+	<report id="task_summary_report" model="project.task"
+		string="Task Summary Report" report_type="qweb-pdf"
+		name="pb_customizations.report_task_details" attachment_use="False"
+		file="pb_customizations.report_task_details" />
+</odoo>

@@ -20,8 +20,10 @@
                 'portal',
                 'account_accountant'],
     'data': [
-        "security/ir.model.access.csv",
-        "security/main_menu_invisible_view.xml",
+            "security/ir.model.access.csv",
+            "security/main_menu_invisible_view.xml",
+            "views/report_task_details.xml",
+            "views/pb_customizations_report.xml",
             "views/hr_timesheet_sheet_view.xml",
             "views/project_view.xml",
             "views/hr_employe_view.xml",

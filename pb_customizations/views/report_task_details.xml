@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+<template id="report_task_details_document">
+    <t t-call="report.external_layout">
+        <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" />
+        <div class="page">
+            <h2 align="center">
+                <span>Task Summary Report</span>                
+            </h2>
+
+            <div align="center">
+                <div align="center" t-if="o.name">
+                    <strong>Task Description:</strong>
+                    <p t-field="o.name"/>
+                </div>
+                <div align="center" t-if="o.date_assign">
+                    <strong>Task Date:</strong>
+                    <p t-field="o.date_assign"/>
+                </div>
+            </div>
+            
+            <table class="table table-bordered">
+            	<tr>
+					<td class="text-center">
+						<strong>Customer Name</strong>
+					</td>
+					<td class="text-center">
+						<span t-field="o.partner_id.name" />
+					</td>
+				</tr>
+				<tr>
+					<td class="text-center">
+						<strong>Vehicle Name</strong>
+					</td>
+					<td class="text-center">
+						<span t-field="o.vehicle_details.name" />
+					</td>
+				</tr>
+				<tr>
+					<td class="text-center">
+						<strong>Start Time</strong>
+					</td>
+					<td class="text-center">
+						<span t-field="o.date_assign" />
+					</td>
+				</tr>
+				<tr>
+					<td class="text-center">
+						<strong>Stop Time</strong>
+					</td>
+					<td class="text-center">
+						<span t-field="o.date_assign" />
+					</td>
+				</tr>
+				<tr>
+					<td class="text-center">
+						<strong>Duration</strong>
+					</td>
+					<td class="text-center">
+						<span>0:0</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="text-center">
+						<strong>Employee</strong>
+					</td>
+					<td class="text-center">
+						<span t-field="o.user_id.name" />
+					</td>
+				</tr>
+			</table>
+			<p align="right">
+				<br /><br /><br />
+				<strong>Verified By</strong>
+			</p>
+        </div>
+    </t>
+</template>
+
+<template id="report_task_details">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+        	<t t-call="pb_customizations.report_task_details_document" t-lang="o.partner_id.lang"/>
+        </t>
+    </t>
+</template>
+</data>
+</odoo>
