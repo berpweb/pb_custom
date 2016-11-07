@@ -17,6 +17,7 @@
                 'hr_attendance',
                 'hr_timesheet_sheet', 
                 'account',
+                'portal',
                 'account_accountant'],
     'data': [
         "security/ir.model.access.csv",
@@ -29,6 +30,7 @@
             "views/partner_view.xml",
             "views/vechicle_view.xml",
             "views/res_user_view.xml",
+            "views/client_action_view.xml",
             "views/pb_search_view.xml",
              ],
     'demo': [],

@@ -6,8 +6,11 @@
 		<field name="arch" type="xml">
 			<search string="Tasks">
 				<field name="name" string="Tasks" />
-				<field name="partner_id" />
+				<field name="id" string="Task ID" />
+				<field name="partner_id" string="Customer" />
 				<field name="user_id" />
+				<filter string="My Tasks" name="my_tasks" domain="[('user_id','=',uid)]"/>
+				<filter string="New" name="draft" domain="[('stage_id.sequence', '&lt;=', 1)]"/>
 			</search>
 		</field>
 	</record>

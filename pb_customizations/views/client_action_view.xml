@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<act_window id="account.action_move_line_select_by_partner"
+			name="Journal Items" groups="pb_customizations.make_invisible"
+			context="{'search_default_partner_id': [active_id]}" res_model="account.move.line"
+			src_model="res.partner" />
+
+		<report id="account.action_report_print_overdue" model="res.partner"
+			report_type="qweb-pdf" string="Due Payments" groups="pb_customizations.make_invisible"
+			name="account.report_overdue" file="account.report_overdue" />
+
+		<act_window name="Partner Mass Mailing" res_model="mail.compose.message"
+			src_model="res.partner" view_mode="form" groups="pb_customizations.make_invisible"
+			multi="True" target="new" key2="client_action_multi" id="base.action_partner_mass_mail"
+			context="{
+                            'default_composition_mode': 'mass_mail',
+                            'default_partner_to': '${object.id or \'\'}',
+                            'default_use_template': True,
+                            'default_template_id': ref('email_template_partner'),
+                        }" />
+	</data>
+</odoo>

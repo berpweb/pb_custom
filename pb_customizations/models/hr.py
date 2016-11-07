@@ -7,7 +7,8 @@ class HrEmployee(models.Model):
     
     @api.depends('user_id')
     def compute_user_id(self):
-        self.user_id_rel = self.user_id.id
+        for emp in self:
+            emp.user_id_rel = emp.user_id.id
 
 
 class HrAttendance(models.Model):
@@ -17,4 +18,5 @@ class HrAttendance(models.Model):
     
     @api.depends('employee_id')
     def compute_emp_id(self):
-        self.emp_id_rel = self.employee_id.id
+        for emp in self:
+            emp.emp_id_rel = emp.employee_id.id

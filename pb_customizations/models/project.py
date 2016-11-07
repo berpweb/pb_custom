@@ -3,7 +3,7 @@ from openerp import models, api, fields
 class Task(models.Model):
     _inherit = 'project.task'
     
-    partner_id = fields.Many2one('res.partner')
+    partner_id = fields.Many2one('res.partner', domain=[('customer', '=', 1)])
     customer_name = fields.Char(related='partner_id.name')
     customer_phone = fields.Char(related='partner_id.mobile')
     customer_address1 = fields.Char(related='partner_id.street')
