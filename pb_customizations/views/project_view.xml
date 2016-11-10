@@ -126,6 +126,23 @@
 					<field name="task_start_time" />
 					<field name="task_stop_time" />
 				</xpath>
+				<xpath expr="//field[@name='timesheet_ids']/tree" position="after">
+					<form string="Timesheet Details">
+						<sheet>
+							<group>
+								<group>
+									<field name="name" />
+									<field name="date" />
+								</group>
+								<group>
+									<field name="task_start_time" />
+									<field name="task_stop_time" />
+									<field name="unit_amount" string="Duration" />
+								</group>
+							</group>
+						</sheet>
+					</form>
+				</xpath>
             </field>
     </record>
     
