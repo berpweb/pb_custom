@@ -30,6 +30,7 @@
             "views/hr_attendance_view.xml",
             "views/main_sub_menu.xml",
             "views/partner_view.xml",
+            "views/res_country_view.xml",
             "views/vechicle_view.xml",
             "views/res_user_view.xml",
             "views/client_action_view.xml",

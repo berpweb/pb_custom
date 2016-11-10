@@ -15,3 +15,12 @@ class Task(models.Model):
     task_stop_time = fields.Datetime(string="Task Stop Time")
     task_work_duration = fields.Float(string="Task Work Duration")
     vehicle_details = fields.Many2one('vehicle.vehicle', string="Vehicle Name")
+
+    @api.model
+    def fields_get(self, *args, **kwargs):
+        fields_to_show = ['name', 'vehicle_details', 'stage_id']
+        res = super(Task, self.sudo()).fields_get(*args, **kwargs)
+        for k in res.iterkeys():
+                if k not in fields_to_show:
+                    res[k]['selectable'] = False
+        return res

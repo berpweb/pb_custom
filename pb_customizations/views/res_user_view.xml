@@ -45,7 +45,7 @@
 					<attribute name="invisible">1</attribute>
 				</xpath>
 				<xpath expr="//sheet" position="inside">
-					<group string="Localization" name="preferences">
+					<group string="Zone" name="preferences">
 	                     <field name="lang"/>
 	                     <field name="tz" widget="timezone_mismatch" options="{'tz_offset_field': 'tz_offset'}" />
 	                     <field name="tz_offset" invisible="1"/>

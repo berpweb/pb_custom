@@ -6,6 +6,9 @@
 		<field name="model">res.partner</field>
 		<field name="inherit_id" ref="base.view_partner_form" />
 		<field name="arch" type="xml">
+			<xpath expr="//field[@name='name']" position="attributes">
+				<attribute name="required">1</attribute>
+			</xpath>
 			<xpath expr="//page/group/group/field[@name='customer']"
 				position="attributes">
 				<attribute name="invisible">1</attribute>
@@ -15,7 +18,52 @@
 				<attribute name="invisible">1</attribute>
 			</xpath>
 			<xpath expr="//page/field[@name='child_ids']" position="attributes">
+				<attribute name="string">Billing Addresses</attribute>
+			</xpath>
+			<xpath expr="//page/field[@name='child_ids']/.." position="attributes">
+				<attribute name="string">Billing Addresses</attribute>
+			</xpath>
+			<xpath expr="//page/field[@name='child_ids']/form//label[@for='street']" position="attributes">
+				<attribute name="string">Billing Address</attribute>
+			</xpath>
+			<xpath expr="//page/field[@name='child_ids']/form//field[@name='street2']" position="attributes">
 				<attribute name="invisible">1</attribute>
+			</xpath>
+			<xpath expr="//page/field[@name='child_ids']/form//field[@name='type']" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</xpath>
+			<xpath expr="//page/field[@name='child_ids']/form//field[@name='phone']" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</xpath>
+			<xpath expr="//page/field[@name='child_ids']/form//field[@name='comment']" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</xpath>
+			<xpath expr="//page/field[@name='child_ids']/form//field[@name='country_id']" position="attributes">
+				<attribute name="required">1</attribute>
+			</xpath>
+			<xpath expr="//page/field[@name='child_ids']/form//field[@name='zip']" position="attributes">
+				<attribute name="required">1</attribute>
+			</xpath>
+			<xpath expr="//page/field[@name='child_ids']/form//field[@name='mobile']" position="attributes">
+				<attribute name="required">1</attribute>
+			</xpath>
+			<xpath expr="//page/field[@name='child_ids']/form//field[@name='street']" position="attributes">
+				<attribute name="required">1</attribute>
+			</xpath>
+			<xpath expr="//page/field[@name='child_ids']/form//field[@name='city']" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</xpath>
+			<xpath expr="//page/field[@name='child_ids']/form//field[@name='street']" position="before">
+				<field name="po_box" />
+			</xpath>
+			<xpath expr="//page/field[@name='child_ids']/form//field[@name='type']" position="before">
+				<label string="Enter your billing details!" />
+			</xpath>
+			<xpath expr="//page/field[@name='child_ids']/form//field[@name='state_id']" position="attributes">
+				<attribute name="domain">[('country_id.code','=','AI')]</attribute>
+			</xpath>
+			<xpath expr="//page/field[@name='child_ids']/form//field[@name='country_id']" position="attributes">
+				<attribute name="domain">[('code','=','AI')]</attribute>
 			</xpath>
 			<xpath expr="//field[@name='company_type']" position="attributes">
 				<attribute name="invisible">1</attribute>
@@ -62,9 +110,6 @@
 				position="attributes">
 				<attribute name="invisible">1</attribute>
 			</xpath>
-			<xpath expr="//notebook/page[1]" position="attributes">
-				<attribute name="invisible">1</attribute>
-			</xpath>
 			<xpath expr="//field[@name='parent_id']" position="attributes">
 				<attribute name="invisible">1</attribute>
 			</xpath>
@@ -84,20 +129,27 @@
 			<xpath expr="//page[@name='sales_purchases']" position="attributes">
 				<attribute name="invisible">1</attribute>
 			</xpath>
+			<xpath expr="//field[@name='street']" position="before">
+				<field name="po_box" placeholder="PO Box"/>
+			</xpath>
+			<xpath expr="//label[@for='street']" position="attributes">
+				<attribute name="string">Work Address</attribute>
+			</xpath>
 			<xpath expr="//field[@name='street']" position="attributes">
 				<attribute name="required">1</attribute>
 			</xpath>
 			<xpath expr="//field[@name='street2']" position="attributes">
-				<attribute name="required">1</attribute>
+				<attribute name="invisible">1</attribute>
 			</xpath>
 			<xpath expr="//field[@name='state_id']" position="attributes">
-				<attribute name="required">1</attribute>
+				<attribute name="domain">[('country_id.code','=','AI')]</attribute>
 			</xpath>
 			<xpath expr="//field[@name='zip']" position="attributes">
 				<attribute name="required">1</attribute>
 			</xpath>
 			<xpath expr="//field[@name='country_id']" position="attributes">
 				<attribute name="required">1</attribute>
+				<attribute name="domain">[('code','=','AI')]</attribute>
 			</xpath>
 			<xpath expr="//field[@name='mobile']" position="attributes">
 				<attribute name="required">1</attribute>

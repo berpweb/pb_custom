@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<odoo>
+	<record model="ir.ui.view" id="view_country_state_form">
+		<field name="name">res.country.state.form</field>
+            <field name="model">res.country.state</field>
+		<field name="inherit_id" ref="base.view_country_state_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='country_id']" position="attributes">
+				<attribute name="domain">[('code','=','AI')]
+				</attribute>
+				<attribute name="invisible">1</attribute>
+			</xpath>
+		</field>
+	</record>
+</odoo>

@@ -8,8 +8,13 @@
 				<form string="Vehicle Details">
 					<sheet>
 						<group>
-							<field name="name" />
-							<field name="vehicle_number" />
+							<group>
+								<field name="name" />
+								<field name="vehicle_number" />
+							</group>
+							<group>
+								<field name="rates_per_hr" />
+							</group>
 						</group>
 					</sheet>
 				</form>
