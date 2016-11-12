@@ -8,4 +8,5 @@ class CountryState(models.Model):
         return self.env['res.country'].search([('code', '=', 'AI')], limit=1).id
     
     country_id = fields.Many2one(default=_get_default_country)
+    code = fields.Char(default="AL")
     

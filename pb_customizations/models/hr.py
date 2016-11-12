@@ -31,8 +31,16 @@ class HrAttendance(models.Model):
     _inherit = 'hr.attendance'
     
     emp_id_rel = fields.Char(compute='compute_emp_id', store=True)
+    punch_out_address = fields.Char(string="Punch Out Location")
     
     @api.depends('employee_id')
     def compute_emp_id(self):
         for emp in self:
             emp.emp_id_rel = emp.employee_id.id
+            
+    @api.model
+    def create(self, vals):
+        if vals.get('employee_id', False):
+            vals['employee_id'] = int(vals['employee_id'])
+        return super(HrAttendance, self.sudo()).create(vals)
+    

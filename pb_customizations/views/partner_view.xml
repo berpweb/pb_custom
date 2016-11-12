@@ -54,13 +54,14 @@
 				<attribute name="invisible">1</attribute>
 			</xpath>
 			<xpath expr="//page/field[@name='child_ids']/form//field[@name='street']" position="before">
-				<field name="po_box" />
+				<field name="po_box" placeholder="PO Box"/>
 			</xpath>
 			<xpath expr="//page/field[@name='child_ids']/form//field[@name='type']" position="before">
 				<label string="Enter your billing details!" />
 			</xpath>
 			<xpath expr="//page/field[@name='child_ids']/form//field[@name='state_id']" position="attributes">
 				<attribute name="domain">[('country_id.code','=','AI')]</attribute>
+				<attribute name="placeholder">Village</attribute>
 			</xpath>
 			<xpath expr="//page/field[@name='child_ids']/form//field[@name='country_id']" position="attributes">
 				<attribute name="domain">[('code','=','AI')]</attribute>
@@ -129,9 +130,6 @@
 			<xpath expr="//page[@name='sales_purchases']" position="attributes">
 				<attribute name="invisible">1</attribute>
 			</xpath>
-			<xpath expr="//field[@name='street']" position="before">
-				<field name="po_box" placeholder="PO Box"/>
-			</xpath>
 			<xpath expr="//label[@for='street']" position="attributes">
 				<attribute name="string">Work Address</attribute>
 			</xpath>
@@ -143,6 +141,7 @@
 			</xpath>
 			<xpath expr="//field[@name='state_id']" position="attributes">
 				<attribute name="domain">[('country_id.code','=','AI')]</attribute>
+				<attribute name="placeholder">Village</attribute>
 			</xpath>
 			<xpath expr="//field[@name='zip']" position="attributes">
 				<attribute name="required">1</attribute>

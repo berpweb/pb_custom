@@ -71,7 +71,7 @@
 				<group col="4">
 					<div>
 						<group>
-							<field name="partner_id" required="1" />
+							<field name="partner_id" required="1" domain="[('company_type','=','company')]"/>
 							<field name="customer_phone" width="10%" required="1" invisible="1"/>
 							<field name="customer_address1" required="1" invisible="1"/>
 							<field name="customer_zip" required="1" invisible="1"/>

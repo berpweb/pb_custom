@@ -35,6 +35,7 @@
             "views/res_user_view.xml",
             "views/client_action_view.xml",
             "views/pb_search_view.xml",
+            "views/hr_timesheet_current_view.xml",
              ],
     'demo': [],
     'qweb': [],

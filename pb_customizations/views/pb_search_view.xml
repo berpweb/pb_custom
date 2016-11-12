@@ -27,7 +27,7 @@
 	<record id="mail.action_contacts" model="ir.actions.act_window">
         <field name="view_mode">tree,form</field>
         <field name="search_view_id" ref="pb_customizations.view_res_partner_filter"/>
-        <field name="domain">[("customer", "=", 1)]</field>
+        <field name="domain">[("company_type", "=", "company")]</field>
     </record>
     	
 	<record id="hr.view_employee_filter" model="ir.ui.view">
