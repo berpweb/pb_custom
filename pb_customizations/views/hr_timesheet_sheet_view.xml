@@ -63,5 +63,28 @@
 			</form>
 		</field>
 	</record>
+	
+	<record id="view_hr_timesheet_sheet_filter" model="ir.ui.view">
+            <field name="name">hr_timesheet_sheet.sheet.filter</field>
+            <field name="model">hr_timesheet_sheet.sheet</field>
+			<field name="inherit_id" ref="hr_timesheet_sheet.view_hr_timesheet_sheet_filter" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='date_from']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//filter[@name='new']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//filter[@name='to_approve']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//filter[@name='message_needaction']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//field[@name='department_id']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+			</field>
+	</record>
 
 </odoo>    

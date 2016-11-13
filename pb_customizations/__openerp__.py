@@ -36,6 +36,8 @@
             "views/client_action_view.xml",
             "views/pb_search_view.xml",
             "views/hr_timesheet_current_view.xml",
+            "wizard/hr_attendance_slips_by_employees.xml",
+            "views/generate_timesheet_view.xml",
              ],
     'demo': [],
     'qweb': [],

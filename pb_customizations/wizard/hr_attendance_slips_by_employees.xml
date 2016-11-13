@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="view_hr_att_slip_by_employees" model="ir.ui.view">
+            <field name="name">hr_att_payslip_employees</field>
+            <field name="model">hr.attendance.slips.employees</field>
+            <field name="arch" type="xml">
+                <form string="Attendace Slips by Employees">
+                    <group colspan="4" >
+                        <separator string="Employees" colspan="4"/>
+                        <newline/>
+                        <field name="employee_ids" nolabel="1"/>
+                    </group>
+                    <footer>
+                        <button icon="fa-cogs" string="Generate" name="compute_sheet" type="object" class="oe_highlight"  />
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="action_hr_attendance_slips_by_employees" model="ir.actions.act_window">
+            <field name="name">Generate Attendance slips</field>
+            <field name="res_model">hr.attendance.slips.employees</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_hr_att_slip_by_employees"/>
+            <field name="target">new</field>
+        </record>
+
+</odoo>

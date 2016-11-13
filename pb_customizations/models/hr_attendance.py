@@ -27,8 +27,13 @@ class hr_attendance(osv.osv):
                     last_signin_datetime = datetime.strptime(last_signin.name, '%Y-%m-%d %H:%M:%S')
                     signout_datetime = datetime.strptime(obj.name, '%Y-%m-%d %H:%M:%S')
                     workedhours_datetime = (signout_datetime - last_signin_datetime)
+                    hours = workedhours_datetime.seconds/(60 * 60)
+                    minutes = (workedhours_datetime.seconds/(60)) % 60
+                    view_in_time = last_signin_datetime.strftime('%H:%M:%S')
                     hours_data = {'punch_in_time': last_signin_datetime, 
+                                  'view_in_time': view_in_time,
                                   'worked_hours': ((workedhours_datetime.seconds) / 60) / 60.0,
+                                  'view_hours': '%s:%s'%(hours,minutes),
                                   'punch_in_id': last_signin,
                                   'punch_in_address': last_signin.punch_out_address}
                     res[obj.id] = hours_data
@@ -38,8 +43,10 @@ class hr_attendance(osv.osv):
 
     _columns = {
         'punch_in_time': fields.function(_worked_hours_compute, type='datetime', string='Punch In Time', store=True, multi='work'),
+        'view_in_time': fields.function(_worked_hours_compute, type='char', string='Punch In Time', store=True, multi='work'),
         'punch_in_address': fields.function(_worked_hours_compute, type='char', string='Punch In Location', store=True, multi='work'),
         'punch_in_id': fields.function(_worked_hours_compute, type='integer', string='Previous Punch In ID', store=True, multi='work'),
         'worked_hours': fields.function(_worked_hours_compute, type='float', string='Worked Hours', store=True, multi='work'),
+        'view_hours': fields.function(_worked_hours_compute, type='char', string='Hours', store=True, multi='work'),
     }
 

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <menuitem id="attendance_management_menu_root" name="Attendance Management"/>
-    <menuitem id="attendance_details_menu" name="Attendance Details" parent="attendance_management_menu_root"/>
+    <menuitem id="attendance_management_menu_root" 
+    	name="Attendance Management" groups="base.group_user"/>
+    <menuitem id="attendance_details_menu" name="Attendance Details" 
+    	parent="attendance_management_menu_root" groups="base.group_user"/>
     
     
     <record id="act_hr_timesheet_sheet_my_timesheets" model="ir.actions.act_window">
@@ -14,9 +16,9 @@
             <field name="search_view_id" ref="hr_timesheet_sheet.view_hr_timesheet_sheet_filter"/>
         </record>
         
-    <menuitem name="Attendance Slips" id="menu_act_hr_timesheet_sheet_form_my_current" parent="attendance_details_menu" action="act_hr_timesheet_sheet_my_timesheets" sequence="2"/>
-    
-    <menuitem name="Generate Attendance Slips" id="menu_act_hr_pb_attendance_details_generate" parent="attendance_details_menu" sequence="4"/>
+    <menuitem name="Attendance Slips" id="menu_act_hr_timesheet_sheet_form_my_current" 
+    	parent="attendance_details_menu" action="act_hr_timesheet_sheet_my_timesheets" 
+    	groups="base.group_user" sequence="2"/>
     
     <record id="hr_timesheet_sheet_form" model="ir.ui.view">
             <field name="name">hr.timesheet.sheet.form</field>
@@ -66,18 +68,20 @@
                         <page string="Attendances Details" autofocus="autofocus">
                             <field name="attendances_ids">
                                 <tree string="Details">
-                                	<field name="punch_in_time"/>
-                                	<field name="punch_in_address"/>
-                                    <field name="name" string="Punch Out Time"/>
-                                    <field name="punch_out_address"/>
-                                    <field name="worked_hours" sum="Total Hours"/>
+                                	<field name="view_date" string="Date" />
+                                	<field name="view_in_time" string="In Time"/>
+                                	<field name="punch_in_address" string="In Address"/>
+                                    <field name="view_out_time" string="Out Time"/>
+                                    <field name="punch_out_address" string="Out Address"/>
+                                    <field name="view_hours" sum="Total Hours" string="Hours"/>
                                 </tree>
                                  <form string="Details">
                                  	<group>
                                  		<group>
-                                 			<field name="punch_in_time"/>
-		                                    <field name="name" string="Punch Out Time"/>
-		                                    <field name="worked_hours"/>
+                                 			<field name="view_date" />
+                                 			<field name="view_in_time"/>
+		                                    <field name="view_out_time" />
+		                                    <field name="view_hours"/>
                                  		</group>
                                  		<group>
                                  			<field name="punch_in_address"/>
