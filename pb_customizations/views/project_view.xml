@@ -85,15 +85,10 @@
 			</xpath>
 			<xpath expr="//field[@name='project_id']" position="replace">
 			</xpath>
-			<xpath expr="//page[last()]" position="inside">
-				<group col="4">
-					<field name="project_id" required="1" invisible="1"/>
+			<xpath expr="//page[last()]/group/group" position="inside">
 					<field name="image" widget='image' readonly="1" />
-				</group>
+					<field name="project_id" required="1" invisible="1"/>
 			</xpath>
-			<!-- <xpath expr="//page[last()]" position="attributes">
-				<attribute name="invisible">1</attribute>
-			</xpath> -->
 			<xpath expr="//field[@name='message_follower_ids']" position="attributes">
 				<attribute name="invisible">1</attribute>
 			</xpath>
@@ -163,6 +158,17 @@
     <record id="project.open_view_task_list_kanban" model="ir.actions.act_window.view">
             <field name="sequence" eval="1"/>
             <field name="view_mode">form</field>
-        </record>
+     </record>
+     
+     <record id="task_type_edit" model="ir.ui.view">
+            <field name="name">project.task.type.form</field>
+            <field name="model">project.task.type</field>
+            <field name="inherit_id" ref="project.task_type_edit" />
+            <field name="arch" type="xml">
+            	<xpath expr="//field[@name='fold']" position="after">
+					<field name="is_closed" />
+				</xpath>
+            </field>
+     </record>
             
 </odoo>    
