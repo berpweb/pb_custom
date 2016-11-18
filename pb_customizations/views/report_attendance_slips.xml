@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 <data>
-<template id="report_task_details_document">
+<template id="report_attendance_slips_document">
     <t t-call="report.external_layout">
-        <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" />
+        <t t-set="o" t-value="o.with_context({'lang':o.employee_id.user_id.partner_id.lang})" />
         <div class="page">
             <h2 align="center">
-                <span>Work Summary Report</span>                
+                <span>Attendance Slip</span>                
             </h2>
 
-            <div align="center">
+            <!-- <div align="center">
                 <div align="center" t-if="o.name">
                     <strong>Task Description:</strong>
                     <p t-field="o.name"/>
@@ -73,15 +73,15 @@
 			<p align="right">
 				<br /><br /><br />
 				<strong>Verified By</strong>
-			</p>
+			</p> -->
         </div>
     </t>
 </template>
 
-<template id="report_task_details">
+<template id="report_attendance_slip">
     <t t-call="report.html_container">
         <t t-foreach="docs" t-as="o">
-        	<t t-call="pb_customizations.report_task_details_document" t-lang="o.partner_id.lang"/>
+        	<t t-call="pb_customizations.report_attendance_slips_document" t-lang="o.employee_id.user_id.partner_id.lang"/>
         </t>
     </t>
 </template>

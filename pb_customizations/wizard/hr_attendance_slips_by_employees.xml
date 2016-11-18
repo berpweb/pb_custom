@@ -9,7 +9,7 @@
                     <group colspan="4" >
                         <separator string="Employees" colspan="4"/>
                         <newline/>
-                        <field name="employee_ids" nolabel="1"/>
+                        <field name="employee_ids" nolabel="1" options="{'no_create': True}"/>
                     </group>
                     <footer>
                         <button icon="fa-cogs" string="Generate" name="compute_sheet" type="object" class="oe_highlight"  />

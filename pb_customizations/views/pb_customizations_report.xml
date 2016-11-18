@@ -4,4 +4,10 @@
 		string="Task Summary Report" report_type="qweb-pdf"
 		name="pb_customizations.report_task_details" attachment_use="False"
 		file="pb_customizations.report_task_details" />
+		
+		
+	<report id="attendance_slip_report" model="hr_timesheet_sheet.sheet"
+		string="Attendance Slip" report_type="qweb-pdf"
+		name="pb_customizations.report_attendance_slip" attachment_use="False"
+		file="pb_customizations.report_attendance_slip" />
 </odoo>
