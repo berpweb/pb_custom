@@ -50,10 +50,36 @@
 					</tr>
 				</tbody>
 			</table>
-			<p align="right">
-				<br /><br /><br />
-				<strong>Verified By</strong>
-			</p> 
+			<table width="100%">
+				<tr>
+					<td>
+						<br/><br/><br/>
+						<strong>Employee Signature</strong>
+					</td>
+					<td align="right">
+						<br/><br/><br/>
+						<strong>Verified By</strong>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<br/><br/><br/>
+						<strong>Date</strong>
+					</td>
+					<td align="right">
+						<br/><br/><br/>
+						<strong>Date</strong>
+					</td>
+				</tr>
+				<!-- <p align="right">
+					<br /><br /><br />
+					<strong>Verified By...</strong>
+				</p> 
+				<p align="right">
+					<br /><br /><br />
+					<strong>Date</strong>
+				</p>  -->
+			</table>
         </div>
     </t>
 </template>
