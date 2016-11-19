@@ -33,18 +33,20 @@
                 </thead>
                 <tbody>
 	            	<tr t-foreach="o.attendances_ids" t-as="l">
-						<td class="text-center">
-							<span t-field="l.view_date"/>
-						</td>
-						<td class="text-center">
-							<span t-field="l.view_in_time"/>
-						</td>
-						<td class="text-center">
-							<span t-field="l.view_out_time"/>
-						</td>
-						<td class="text-center">
-							<span t-field="l.view_hours"/>
-						</td>
+		            	<t t-if="l.action=='sign_out'">
+							<td class="text-center">
+								<span t-field="l.view_date"/>
+							</td>
+							<td class="text-center">
+								<span t-field="l.view_in_time"/>
+							</td>
+							<td class="text-center">
+								<span t-field="l.view_out_time"/>
+							</td>
+							<td class="text-center">
+								<span t-field="l.view_hours"/>
+							</td>
+						</t>
 					</tr>
 				</tbody>
 			</table>
