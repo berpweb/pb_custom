@@ -39,6 +39,11 @@ class Task(models.Model):
     image_medium = fields.Binary('Customer Signature', attachment=True)
     image_small = fields.Binary('Customer Signature', attachment=True)
     
+    @api.model
+    def create(self, vals):
+        tools.image_resize_images(vals)
+        return super(Task, self).create(vals)
+    
     @api.multi
     def write(self, vals):
         if vals.get('task_done', False) and vals['task_done'] == "ok":
@@ -62,6 +67,30 @@ class Task(models.Model):
             vals['vehicle_details'] = self.env['vehicle.vehicle'].search([('name', '=', vehicle)], limit=1).id
         if vals.get('user_id', False):
             vals['user_id'] = int(vals['user_id'])
+        if vals.get('image', False):
+            tools.image_resize_images(vals)
+#         if vals.get('task_stop_time', False):
+#             vals['timesheet_ids'] = [(0,0,{'date': self.task_start_time.split()[0],
+#                                            'name': 'Work Duration', 
+#                                            'task_start_time': self.task_start_time,
+#                                            'task_stop_time': self.task_stop_time,
+#                                            'task_work_duration': self.task_work_duration,
+#                                            'user_id': self.user_id.id,
+#                                            'account_id': self.analytic_account_id.id})]
+#             vals['task_start_time'] = '-'
+#             vals['task_stop_time'] = '-'
+#             vals['task_work_duration'] = '-'
+#         if vals.get('vehicle_stop_time', False):
+#             vals['timesheet_ids'] = [(0,0,{'date': self.vehicle_start_time.split()[0],
+#                                            'name': 'Vehicle Duration', 
+#                                            'task_start_time': self.vehicle_start_time,
+#                                            'task_stop_time': self.vehicle_stop_time,
+#                                            'task_work_duration': self.vehicle_work_duration,
+#                                            'user_id': self.user_id.id,
+#                                            'account_id': self.analytic_account_id.id})]
+#             vals['vehicle_start_time'] = '-'
+#             vals['vehicle_stop_time'] = '-'
+#             vals['vehicle_work_duration'] = '-'
         return super(Task, self).write(vals)
 
     @api.model

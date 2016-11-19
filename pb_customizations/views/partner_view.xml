@@ -66,6 +66,9 @@
 			<xpath expr="//page/field[@name='child_ids']/form//field[@name='country_id']" position="attributes">
 				<attribute name="domain">[('code','=','AI')]</attribute>
 			</xpath>
+			<xpath expr="//page/field[@name='child_ids']/form//field[@name='name']" position="attributes">
+				<attribute name="required">1</attribute>
+			</xpath>
 			<xpath expr="//field[@name='company_type']" position="attributes">
 				<attribute name="invisible">1</attribute>
 			</xpath>

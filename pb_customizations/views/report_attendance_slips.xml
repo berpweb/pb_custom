@@ -9,71 +9,49 @@
                 <span>Attendance Slip</span>                
             </h2>
 
-            <!-- <div align="center">
-                <div align="center" t-if="o.name">
-                    <strong>Task Description:</strong>
-                    <p t-field="o.name"/>
+            <div align="center">
+                <div align="center" t-if="o.employee_id">
+                    <strong>Employee Name:</strong>
+                    <p t-field="o.employee_id.name"/>
                 </div>
-                <div align="center" t-if="o.date_assign">
-                    <strong>Task Date:</strong>
-                    <p t-field="o.date_assign"/>
+                <div align="center" t-if="o.date_from">
+                    <strong>Attendance Period:</strong>
+                    <br/>
+                    <span t-field="o.date_from"/> to <span t-field="o.date_to"/> 
                 </div>
             </div>
+            <br/>
             
             <table class="table table-bordered">
-            	<tr>
-					<td class="text-center">
-						<strong>Customer Name</strong>
-					</td>
-					<td class="text-center">
-						<span t-field="o.partner_id.name" />
-					</td>
-				</tr>
-				<tr>
-					<td class="text-center">
-						<strong>Vehicle Name</strong>
-					</td>
-					<td class="text-center">
-						<span t-field="o.vehicle_details.name" />
-					</td>
-				</tr>
-				<tr>
-					<td class="text-center">
-						<strong>Start Time</strong>
-					</td>
-					<td class="text-center">
-						<span t-field="o.date_assign" />
-					</td>
-				</tr>
-				<tr>
-					<td class="text-center">
-						<strong>Stop Time</strong>
-					</td>
-					<td class="text-center">
-						<span t-field="o.date_assign" />
-					</td>
-				</tr>
-				<tr>
-					<td class="text-center">
-						<strong>Duration</strong>
-					</td>
-					<td class="text-center">
-						<span>0:0</span>
-					</td>
-				</tr>
-				<tr>
-					<td class="text-center">
-						<strong>Employee</strong>
-					</td>
-					<td class="text-center">
-						<span t-field="o.user_id.name" />
-					</td>
-				</tr>
+            	<thead>
+                    <tr>
+                        <th class="text-center">Date</th>
+                        <th class="text-center">In Time</th>
+                        <th class="text-center">Out Time</th>
+                        <th class="text-center">Hours</th>
+                    </tr>
+                </thead>
+                <tbody>
+	            	<tr t-foreach="o.attendances_ids" t-as="l">
+						<td class="text-center">
+							<span t-field="l.view_date"/>
+						</td>
+						<td class="text-center">
+							<span t-field="l.view_in_time"/>
+						</td>
+						<td class="text-center">
+							<span t-field="l.view_out_time"/>
+						</td>
+						<td class="text-center">
+							<span t-field="l.view_hours"/>
+						</td>
+					</tr>
+				</tbody>
 			</table>
 			<p align="right">
 				<br /><br /><br />
 				<strong>Verified By</strong>
-			</p> -->
+			</p> 
         </div>
     </t>
 </template>

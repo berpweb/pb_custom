@@ -16,19 +16,22 @@
                 </div>
                 <div align="center" t-if="o.date_assign">
                     <strong>Task Date:</strong>
-                    <p t-field="o.date_assign"/>
+                    <p t-esc="o.date_assign.split()[0]"/>
                 </div>
             </div>
             
+            <div align="left">
+                <strong>Customer Name and Address:</strong> <br/>
+                <span t-if="o.partner_id" t-field="o.partner_id.name" /><br/>
+                <span t-field="o.partner_id.street" /><br/>
+                <div t-if="o.partner_id.state_id"><span t-field="o.partner_id.state_id.name" /><br/></div>
+                <p t-if="o.partner_id.country_id">
+                	<span t-field="o.partner_id.country_id.name" />, 
+                	<span t-field="o.partner_id.zip" />
+               	</p>
+            </div>
+            
             <table class="table table-bordered">
-            	<tr>
-					<td class="text-center">
-						<strong>Customer Name</strong>
-					</td>
-					<td class="text-center">
-						<span t-field="o.partner_id.name" />
-					</td>
-				</tr>
 				<tr>
 					<td class="text-center">
 						<strong>Vehicle Name</strong>
@@ -39,18 +42,18 @@
 				</tr>
 				<tr>
 					<td class="text-center">
-						<strong>Start Time</strong>
+						<strong>Work Start Time</strong>
 					</td>
 					<td class="text-center">
-						<span t-field="o.date_assign" />
+						<span t-field="o.task_start_time" />
 					</td>
 				</tr>
 				<tr>
 					<td class="text-center">
-						<strong>Stop Time</strong>
+						<strong>Work Stop Time</strong>
 					</td>
 					<td class="text-center">
-						<span t-field="o.date_assign" />
+						<span t-field="o.task_stop_time" />
 					</td>
 				</tr>
 				<tr>
@@ -58,22 +61,30 @@
 						<strong>Duration</strong>
 					</td>
 					<td class="text-center">
-						<span>0:0</span>
+						<span t-field="o.task_work_duration" />
 					</td>
 				</tr>
 				<tr>
 					<td class="text-center">
-						<strong>Employee</strong>
+						<strong>Work Done by</strong>
 					</td>
 					<td class="text-center">
 						<span t-field="o.user_id.name" />
 					</td>
 				</tr>
 			</table>
-			<p align="right">
-				<br /><br /><br />
+			<table border="0" style="border: none; margin: 0px;" width="100%">
+			<tr>
+			<td align="left">
+			<strong>Customer Signature:</strong><br/>
+                <img align="left" t-attf-src="data:image/png;base64,#{o.image_small}"/>
+            </td>
+			<td align="right">
+				<br/><br/><br/><br/><br/><br/>
 				<strong>Verified By</strong>
-			</p>
+			</td>
+			</tr>
+			</table>
         </div>
     </t>
 </template>
