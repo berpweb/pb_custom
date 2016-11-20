@@ -50,3 +50,25 @@ class hr_attendance(osv.osv):
         'view_hours': fields.function(_worked_hours_compute, type='char', string='Hours', store=True, multi='work'),
     }
 
+
+# from openerp import models, api
+# from openerp.exceptions import UserError
+# 
+# class HrAttendance(models.Model):
+#     _inherit = "hr.attendance"
+#     
+#     @api.onchange('view_hours')
+#     def on_change_view_hours(self):
+#         if self.view_hours and '.' in str(self.view_hours):
+#             raise UserError('Please use colon ":" instead of dot "." in attendance hours!')
+#         try:
+#             self.view_hours.split(':')[1] if self.view_hours else '0:0'
+#         except IndexError:
+#             self.view_hours = "%s:%s"%(self.view_hours.split(':')[0], 0)
+#         else:
+#             pass
+#         
+#     @api.multi
+#     def write(self, vals):
+#         if vals.get('view_hours', False) and '.' in vals['view_hours']:
+#             raise UserError('Please use colon ":" instead of dot "." in attendance hours!')

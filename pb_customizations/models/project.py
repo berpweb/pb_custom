@@ -29,6 +29,32 @@ class Task(models.Model):
     vehicle_name = fields.Char(related='vehicle_details.name')
     vehicle_number = fields.Char(related='vehicle_details.vehicle_number')
     vehicle_name_number = fields.Char(string="Vehicle Name Number", default='-', copy=False)
+    is_sign_updated = fields.Char(string="Is Signature Updated?", default='-', copy=False)
+    total_task_work_duration = fields.Char(string="Total Work Duration", compute='_get_total_hours', 
+                                     default='-', copy=False, store=True)
+    total_vehicle_work_duration = fields.Char(string="Total Vehicle Duration", compute='_get_total_hours', 
+                                     default='-', copy=False, store=True)
+    
+    @api.one
+    @api.depends('timesheet_ids.task_work_duration')
+    def _get_total_hours(self):
+        task_hours, task_mins, vehicle_hours, vehicle_mins = 0,0,0,0
+        work_timesheets = self.timesheet_ids.filtered(lambda timesheets: timesheets.name =='Work Duration')
+        vehicle_timesheets = self.timesheet_ids.filtered(lambda timesheets: timesheets.name =='Vehicle Duration')
+        total_task_work_duration = work_timesheets.mapped('task_work_duration')
+        for task_duration in total_task_work_duration:
+            if task_duration and task_duration != '0:0' and not '.' in task_duration:
+                hours_mins = task_duration.split(':')
+                task_hours += int(hours_mins[0]) if hours_mins else 0
+                task_mins += int(hours_mins[1]) if hours_mins else 0
+        self.total_task_work_duration = '%s:%s'%(task_hours, task_mins)
+        total_vehicle_work_duration = vehicle_timesheets.mapped('task_work_duration')
+        for vehicle_duration in total_vehicle_work_duration:
+            if vehicle_duration and vehicle_duration != '0:0' and not '.' in vehicle_duration:
+                hours_mins = vehicle_duration.split(':')
+                vehicle_hours += int(hours_mins[0]) if hours_mins else 0
+                vehicle_mins += int(hours_mins[1]) if hours_mins else 0
+        self.total_vehicle_work_duration = '%s:%s'%(vehicle_hours, vehicle_mins)
     
     def _default_image(self):
         image_path = openerp.modules.get_module_resource('pb_customizations', 'static/src/img', 'default.png')
@@ -48,49 +74,36 @@ class Task(models.Model):
     def write(self, vals):
         if vals.get('task_done', False) and vals['task_done'] == "ok":
             vals['stage_id'] = self.env['project.task.type'].search([('is_closed', '=', True)], limit=1).id
-            vals['timesheet_ids'] = [(0,0,{'date': self.vehicle_start_time.split()[0],
-                                           'name': 'Vehicle Duration', 
-                                           'task_start_time': self.vehicle_start_time,
-                                           'task_stop_time': self.vehicle_stop_time,
-                                           'task_work_duration': self.vehicle_work_duration,
-                                           'user_id': self.user_id.id,
-                                           'account_id': self.analytic_account_id.id}),
-                                     (0,0,{'date': self.task_start_time.split()[0],
-                                           'name': 'Work Duration', 
-                                           'task_start_time': self.task_start_time,
-                                           'task_stop_time': self.task_stop_time,
-                                           'task_work_duration': self.task_work_duration,
-                                           'user_id': self.user_id.id,
-                                           'account_id': self.analytic_account_id.id})]
         if vals.get('vehicle_name_number', False):
             vehicle = vals['vehicle_name_number'].split(' - ')[0]
             vals['vehicle_details'] = self.env['vehicle.vehicle'].search([('name', '=', vehicle)], limit=1).id
         if vals.get('user_id', False):
             vals['user_id'] = int(vals['user_id'])
+            vals['date_assign'] = fields.datetime.now()
         if vals.get('image', False):
             tools.image_resize_images(vals)
-#         if vals.get('task_stop_time', False):
-#             vals['timesheet_ids'] = [(0,0,{'date': self.task_start_time.split()[0],
-#                                            'name': 'Work Duration', 
-#                                            'task_start_time': self.task_start_time,
-#                                            'task_stop_time': self.task_stop_time,
-#                                            'task_work_duration': self.task_work_duration,
-#                                            'user_id': self.user_id.id,
-#                                            'account_id': self.analytic_account_id.id})]
-#             vals['task_start_time'] = '-'
-#             vals['task_stop_time'] = '-'
-#             vals['task_work_duration'] = '-'
-#         if vals.get('vehicle_stop_time', False):
-#             vals['timesheet_ids'] = [(0,0,{'date': self.vehicle_start_time.split()[0],
-#                                            'name': 'Vehicle Duration', 
-#                                            'task_start_time': self.vehicle_start_time,
-#                                            'task_stop_time': self.vehicle_stop_time,
-#                                            'task_work_duration': self.vehicle_work_duration,
-#                                            'user_id': self.user_id.id,
-#                                            'account_id': self.analytic_account_id.id})]
-#             vals['vehicle_start_time'] = '-'
-#             vals['vehicle_stop_time'] = '-'
-#             vals['vehicle_work_duration'] = '-'
+        if vals.get('task_stop_time', False):
+            vals['timesheet_ids'] = [(0,0,{'date': self.task_start_time.split()[0],
+                                           'name': 'Work Duration', 
+                                           'task_start_time': self.task_start_time,
+                                           'task_stop_time': vals['task_stop_time'],
+                                           'task_work_duration': vals['task_work_duration'],
+                                           'user_id': self.user_id.id,
+                                           'account_id': self.analytic_account_id.id})]
+            vals['task_start_time'] = '-'
+            vals['task_stop_time'] = '-'
+            vals['task_work_duration'] = '-'
+        if vals.get('vehicle_stop_time', False):
+            vals['timesheet_ids'] = [(0,0,{'date': self.vehicle_start_time.split()[0],
+                                           'name': 'Vehicle Duration', 
+                                           'task_start_time': self.vehicle_start_time,
+                                           'task_stop_time': vals['vehicle_stop_time'],
+                                           'task_work_duration': vals['vehicle_work_duration'],
+                                           'user_id': self.user_id.id,
+                                           'account_id': self.analytic_account_id.id})]
+            vals['vehicle_start_time'] = '-'
+            vals['vehicle_stop_time'] = '-'
+            vals['vehicle_work_duration'] = '-'
         return super(Task, self).write(vals)
 
     @api.model

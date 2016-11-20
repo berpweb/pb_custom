@@ -42,6 +42,9 @@
                     	<attribute name="widget"></attribute>
                     	<attribute name="groups"></attribute>
                     </xpath>
+                    <!-- <xpath expr="//field[@name='total_attendance']" position="after">
+                    	<field name="attendance_total_hours" string="Total Hours" />
+                    </xpath> -->
                     <xpath expr="//label[@for='date_from']" position="attributes">
                     	<attribute name="string">Attendance Period</attribute>
                     </xpath>
@@ -68,23 +71,23 @@
                         <page string="Attendances Details" autofocus="autofocus">
                             <field name="attendances_ids">
                                 <tree string="Details">
-                                	<field name="view_date" string="Date" />
-                                	<field name="view_in_time" string="In Time"/>
-                                	<field name="punch_in_address" string="In Address"/>
-                                    <field name="view_out_time" string="Out Time"/>
-                                    <field name="punch_out_address" string="Out Address"/>
-                                    <field name="view_hours" sum="Total Hours" string="Hours"/>
+                                	<field name="view_date" string="Date" readonly="1" />
+                                	<field name="view_in_time" string="In Time" readonly="1" />
+                                	<field name="punch_in_address" string="In Address" readonly="1" />
+                                    <field name="view_out_time" string="Out Time" readonly="1" />
+                                    <field name="punch_out_address" string="Out Address" readonly="1" />
+                                    <field name="view_hours" sum="Total Hours" string="Hours" readonly="1" />
                                 </tree>
                                  <form string="Details">
                                  	<group>
                                  		<group>
-                                 			<field name="view_date" />
-                                 			<field name="view_in_time"/>
-		                                    <field name="view_out_time" />
-		                                    <field name="view_hours"/>
+                                 			<field name="view_date" readonly="1"/>
+                                 			<field name="view_in_time" readonly="1"/>
+		                                    <field name="view_out_time" readonly="1" />
+		                                    <field name="view_hours" readonly="1"/>
                                  		</group>
                                  		<group>
-                                 			<field name="punch_in_address"/>
+                                 			<field name="punch_in_address" readonly="1"/>
                                  			<field name="punch_out_address" readonly="1"/>
                                  		</group>
                                     </group>

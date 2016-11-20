@@ -42,26 +42,10 @@
 				</tr>
 				<tr>
 					<td class="text-center">
-						<strong>Work Start Time</strong>
+						<strong>Total Duration</strong>
 					</td>
 					<td class="text-center">
-						<span t-field="o.task_start_time" />
-					</td>
-				</tr>
-				<tr>
-					<td class="text-center">
-						<strong>Work Stop Time</strong>
-					</td>
-					<td class="text-center">
-						<span t-field="o.task_stop_time" />
-					</td>
-				</tr>
-				<tr>
-					<td class="text-center">
-						<strong>Duration</strong>
-					</td>
-					<td class="text-center">
-						<span t-field="o.task_work_duration" />
+						<span t-field="o.total_task_work_duration" />
 					</td>
 				</tr>
 				<tr>
@@ -73,11 +57,40 @@
 					</td>
 				</tr>
 			</table>
+			
+			<h4 align="center">
+                <strong>Time Details</strong>             
+            </h4>
+			
+            <table class="table table-bordered">
+            	<thead>
+                    <tr>
+                        <th class="text-center">Work Start Time</th>
+                        <th class="text-center">Work Stop Time</th>
+                        <th class="text-center">Duration</th>
+                    </tr>
+                </thead>
+                <tbody>
+	            	<tr t-foreach="o.timesheet_ids" t-as="l">
+		            	<t t-if="l.name=='Work Duration'">
+							<td class="text-center">
+								<span t-field="l.task_start_time"/>
+							</td>
+							<td class="text-center">
+								<span t-field="l.task_stop_time"/>
+							</td>
+							<td class="text-center">
+								<span t-field="l.task_work_duration"/>
+							</td>
+						</t>
+					</tr>
+				</tbody>
+			</table>
 			<table border="0" style="border: none; margin: 0px;" width="100%">
 			<tr>
 			<td align="left">
 			<strong>Customer Signature:</strong><br/>
-                <img align="left" t-attf-src="data:image/png;base64,#{o.image_small}"/>
+                <img align="left" t-attf-src="data:image/png;base64,#{o.image_medium}"/>
             </td>
 			<td align="right">
 				<br/><br/><br/><br/><br/><br/>
