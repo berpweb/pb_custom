@@ -42,10 +42,18 @@
 				</tr>
 				<tr>
 					<td class="text-center">
+						<strong>Rates Per Hour</strong>
+					</td>
+					<td class="text-center">
+						<span t-field="o.vehicle_details.rates_per_hr" />
+					</td>
+				</tr>
+				<tr>
+					<td class="text-center">
 						<strong>Total Duration</strong>
 					</td>
 					<td class="text-center">
-						<span t-field="o.total_task_work_duration" />
+						<span t-esc="str(o.total_task_work_duration).split(':')[0]" /> hour, <span t-esc="str(o.total_task_work_duration).split(':')[1]" /> mins.
 					</td>
 				</tr>
 				<tr>

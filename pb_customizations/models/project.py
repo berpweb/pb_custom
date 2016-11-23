@@ -68,6 +68,7 @@ class Task(models.Model):
     @api.model
     def create(self, vals):
         tools.image_resize_images(vals)
+        vals['date_assign'] = fields.datetime.now()
         return super(Task, self).create(vals)
     
     @api.multi
@@ -79,7 +80,6 @@ class Task(models.Model):
             vals['vehicle_details'] = self.env['vehicle.vehicle'].search([('name', '=', vehicle)], limit=1).id
         if vals.get('user_id', False):
             vals['user_id'] = int(vals['user_id'])
-            vals['date_assign'] = fields.datetime.now()
         if vals.get('image', False):
             tools.image_resize_images(vals)
         if vals.get('task_stop_time', False):

@@ -19,9 +19,6 @@
 		<field name="model">hr.employee</field>
 		<field name="inherit_id" ref="hr.view_employee_form" />
 		<field name="arch" type="xml">
-			<xpath expr="//button[@name='toggle_active']" position="attributes">
-				<attribute name="invisible">1</attribute>
-			</xpath>
 			<xpath
 				expr="//notebook/page[@name='public']"
 				position="attributes">
