@@ -18,6 +18,10 @@ class HrTimesheetSheet(models.Model):
                 hours_mins = attendance.split(':')
                 attendance_hours += int(hours_mins[0]) if hours_mins else 0
                 attendance_mins += int(hours_mins[1]) if hours_mins else 0
+        attendance_seconds = (attendance_hours * 60 * 60) + (attendance_mins * 60)
+        if attendance_seconds:
+            attendance_hours = attendance_seconds/(60 * 60)
+            attendance_mins = (attendance_seconds/(60)) % 60
         self.attendance_total_hours = '%s:%s'%(attendance_hours, attendance_mins)
     
     @api.multi

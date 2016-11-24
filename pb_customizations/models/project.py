@@ -47,6 +47,10 @@ class Task(models.Model):
                 hours_mins = task_duration.split(':')
                 task_hours += int(hours_mins[0]) if hours_mins else 0
                 task_mins += int(hours_mins[1]) if hours_mins else 0
+        task_seconds = (task_hours * 60 * 60) + (task_mins * 60)
+        if task_seconds:
+            task_hours = task_seconds/(60 * 60)
+            task_mins = (task_seconds/(60)) % 60
         self.total_task_work_duration = '%s:%s'%(task_hours, task_mins)
         total_vehicle_work_duration = vehicle_timesheets.mapped('task_work_duration')
         for vehicle_duration in total_vehicle_work_duration:
@@ -54,6 +58,10 @@ class Task(models.Model):
                 hours_mins = vehicle_duration.split(':')
                 vehicle_hours += int(hours_mins[0]) if hours_mins else 0
                 vehicle_mins += int(hours_mins[1]) if hours_mins else 0
+        vehicle_seconds = (vehicle_hours * 60 * 60) + (vehicle_mins * 60)
+        if vehicle_seconds:
+            vehicle_hours = vehicle_seconds/(60 * 60)
+            vehicle_mins = (vehicle_seconds/(60)) % 60
         self.total_vehicle_work_duration = '%s:%s'%(vehicle_hours, vehicle_mins)
     
     def _default_image(self):
