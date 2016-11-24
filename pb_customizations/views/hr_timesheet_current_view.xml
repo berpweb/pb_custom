@@ -42,9 +42,9 @@
                     	<attribute name="widget"></attribute>
                     	<attribute name="groups"></attribute>
                     </xpath>
-                    <!-- <xpath expr="//field[@name='total_attendance']" position="after">
-                    	<field name="attendance_total_hours" string="Total Hours" />
-                    </xpath> -->
+                    <xpath expr="//field[@name='company_id']" position="after">
+            			<field name="attendance_total_hours" string="Total Hours" />
+                    </xpath>
                     <xpath expr="//label[@for='date_from']" position="attributes">
                     	<attribute name="string">Attendance Period</attribute>
                     </xpath>
