@@ -9,7 +9,8 @@
 				<field name="id" string="Task ID" />
 				<field name="partner_id" string="Customer" />
 				<field name="user_id" />
-				<filter string="New" name="draft" domain="[('stage_id.sequence', '&lt;=', 1)]"/>
+				<filter string="New" name="draft" domain="[('stage_id.sequence', '&lt;=', 1), ('vehicle_details', '=', False)]"/>
+				<filter string="In Progress" name="progress" domain="[('stage_id.sequence', '&lt;=', 1), ('vehicle_details', '!=', False)]"/>
 				<filter string="Done" name="done" domain="[('stage_id.sequence', '&gt;', 1)]"/>
 			</search>
 		</field>

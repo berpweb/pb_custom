@@ -19,10 +19,6 @@
                     <br/>
                     <span t-field="o.date_from"/> to <span t-field="o.date_to"/> 
                 </div>
-                <div align="center" t-if="o.attendance_total_hours">
-                    <strong>Total Hours:</strong>
-                    <span t-esc="str(o.attendance_total_hours).split(':')[0]" /> hour, <span t-esc="str(o.attendance_total_hours).split(':')[1]" /> mins.
-                </div>
             </div>
             <br/>
             
@@ -53,6 +49,14 @@
 						</t>
 					</tr>
 				</tbody>
+			</table>
+			<table width="100%">
+				<tr align="right">
+					<td>
+	                    <strong>Total Hours:</strong>
+	                    <span t-esc="str(o.attendance_total_hours).split(':')[0]"/> hour, <span t-esc="str(o.attendance_total_hours).split(':')[1]"/> mins.
+					</td>
+				</tr>
 			</table>
 			<table width="100%">
 				<tr>

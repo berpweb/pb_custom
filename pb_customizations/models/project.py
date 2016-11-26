@@ -1,6 +1,8 @@
 import openerp
 from openerp import models, api, fields
 
+import pytz
+
 from openerp import tools
 
 class Task(models.Model):
@@ -17,6 +19,7 @@ class Task(models.Model):
     customer_country = fields.Char(related='partner_id.country_id.name')
     project_id = fields.Many2one('project.project', string='Project', required=True, readonly=True, default=lambda self: self.env['project.project'].search([], limit=1))
     app_project_id = fields.Char(compute='_get_project_id', store=True)
+    date_assign = fields.Date(required=True, copy=False, default=fields.Date.context_today)
     app_analytic_account_id = fields.Char(compute='_get_analytic_account_id', store=True)
     task_start_time = fields.Char(string="Task start Time", default='-', copy=False)
     task_stop_time = fields.Char(string="Task Stop Time", default='-', copy=False)
@@ -76,7 +79,6 @@ class Task(models.Model):
     @api.model
     def create(self, vals):
         tools.image_resize_images(vals)
-        vals['date_assign'] = fields.datetime.now()
         return super(Task, self).create(vals)
     
     @api.multi

@@ -29,7 +29,7 @@ class hr_attendance(osv.osv):
                     workedhours_datetime = (signout_datetime - last_signin_datetime)
                     hours = workedhours_datetime.seconds/(60 * 60)
                     minutes = (workedhours_datetime.seconds/(60)) % 60
-                    view_in_time = last_signin_datetime.strftime('%H:%M:%S')
+                    view_in_time = last_signin_datetime.strftime('%H:%M:%S %p')
                     hours_data = {'punch_in_time': last_signin_datetime, 
                                   'view_in_time': view_in_time,
                                   'worked_hours': ((workedhours_datetime.seconds) / 60) / 60.0,

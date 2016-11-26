@@ -51,8 +51,8 @@ class HrAttendance(models.Model):
     @api.depends('name')
     def _get_attendace_date(self):
         d = datetime.strptime(self.name, '%Y-%m-%d %H:%M:%S')
-        day_string = d.strftime('%d/%m/%Y')
-        time_string = d.strftime('%H:%M:%S')
+        day_string = d.strftime('%m/%d/%Y')
+        time_string = d.strftime('%H:%M:%S %p')
         self.view_date = day_string
         self.view_out_time = time_string
     

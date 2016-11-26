@@ -16,7 +16,7 @@
                 </div>
                 <div align="center" t-if="o.date_assign">
                     <strong>Task Date:</strong>
-                    <p t-esc="o.date_assign.split()[0]"/>
+                    <p t-field="o.date_assign" t-field-options='{"format": "MM/dd/yyyy"}'/>
                 </div>
             </div>
             
