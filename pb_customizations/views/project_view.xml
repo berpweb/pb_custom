@@ -49,6 +49,7 @@
 				<field name="vehicle_details" attrs="{'invisible':[('vehicle_details', '=', False)]}"/>
 				<field name="total_task_work_duration"/>
 				<field name="total_vehicle_work_duration"/>
+				<field name="task_done" invisible="1"/>
 			</xpath>
 			<xpath expr="//field[@name='kanban_state']" position="attributes">
 				<attribute name="invisible">1</attribute>
@@ -113,9 +114,11 @@
             	</xpath>
             	<xpath expr="//field[@name='timesheet_ids']/.." position="attributes">
 					<attribute name="autofocus">1</attribute>
+					<attribute name="groups"></attribute>
 				</xpath>
 				<xpath expr="//field[@name='timesheet_ids']" position="attributes">
-					<attribute name="readonly">1</attribute>
+					<attribute name="readonly">0</attribute>
+					<attribute name="groups"></attribute>
 				</xpath>
 				<xpath expr="//field[@name='timesheet_ids']/tree/field[@name='name']" position="attributes">
 					<attribute name="attrs">{'readonly':[('name','!=',False)]}</attribute>
@@ -125,6 +128,11 @@
 				</xpath>
 				<xpath expr="//field[@name='timesheet_ids']/tree/field[@name='account_id']" position="attributes">
 					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//field[@name='timesheet_ids']/tree" position="attributes">
+					<attribute name="editable"></attribute>
+					<attribute name="create">false</attribute>
+					<attribute name="delete">false</attribute>
 				</xpath>
 				<xpath expr="//field[@name='timesheet_ids']/tree/field[@name='name']" position="after">
 					<field name="task_start_time" />
@@ -139,14 +147,25 @@
 						<sheet>
 							<group>
 								<group>
-									<field name="name" />
-									<field name="date" />
+									<field name="name" readonly="1"/>
+									<field name="date" readonly="1"/>
 								</group>
 								<group>
-									<field name="task_start_time" />
-									<field name="task_stop_time" />
-									<field name="task_work_duration" string="Duration" />
+									<field name="task_start_time" readonly="1"/>
+									<field name="task_stop_time" readonly="1"/>
+									<field name="task_work_duration" string="Duration" readonly="1"/>
 								</group>
+							</group>
+							<group>
+								<group>
+			                        <label for="to_update" string="To Update?" class="oe_edit_only"/>
+			                         <div class="oe_edit_only">
+			                               <field name="to_update" class="oe_inline"/>
+			                               <field name="update_value" class="oe_inline" placeholder="Enter the data"/>
+			                               <button name="update_data" class="oe_inline oe_highlight" 
+			                               		attrs="{'invisible':[('update_value','=',False)]}" string="Update" type="object" />
+			                         </div>
+			                    </group>
 							</group>
 						</sheet>
 					</form>

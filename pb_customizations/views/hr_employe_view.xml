@@ -5,7 +5,7 @@
             <field name="name">hr.employee.tree</field>
             <field name="model">hr.employee</field>
             <field name="arch" type="xml">
-                <tree string="Employees">
+                <tree string="Employees" delete="false">
                     <field name="name"/>
                     <field name="mobile_phone"/>
                     <field name="work_email"/>
@@ -19,6 +19,9 @@
 		<field name="model">hr.employee</field>
 		<field name="inherit_id" ref="hr.view_employee_form" />
 		<field name="arch" type="xml">
+			<xpath expr="//form" position="attributes">
+				<attribute name="delete">false</attribute>
+			</xpath>
 			<xpath
 				expr="//notebook/page[@name='public']"
 				position="attributes">

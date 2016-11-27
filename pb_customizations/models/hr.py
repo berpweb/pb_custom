@@ -1,6 +1,8 @@
 from openerp import models, api, fields
 from openerp.exceptions import ValidationError
 from datetime import datetime
+from openerp.exceptions import UserError
+from datetime_utilities import valid_date, compute_hours_mins
 
 class HrEmployee(models.Model):
     _inherit = 'hr.employee'
@@ -26,6 +28,12 @@ class HrEmployee(models.Model):
                 if k not in fields_to_show:
                     res[k]['selectable'] = False
         return res
+    
+    @api.multi
+    def write(self, vals):
+        if 'active' in vals and self.user_id:
+            self.user_id.active = vals['active']
+        return super(HrEmployee, self).write(vals)
 
 
 class HrAttendance(models.Model):
@@ -35,6 +43,39 @@ class HrAttendance(models.Model):
     punch_out_address = fields.Char(string="Punch Out Location")
     view_date = fields.Char(compute='_get_attendace_date', store=True, string="Date")
     view_out_time = fields.Char(compute='_get_attendace_date', store=True, string="Punch Out Time")
+    update_value = fields.Char(string="Update Value", copy=False)
+    to_update = fields.Selection([('in', 'Punch In'),
+                                  ('out', 'Punch Out')])
+    
+    def _altern_si_so(self, cr, uid, ids, context=None):
+        return True
+    
+    _constraints = [(_altern_si_so, 'Error ! Sign in (resp. Sign out) must follow Sign out (resp. Sign in)', ['action'])]
+    
+    @api.multi
+    @api.onchange('update_value')
+    def on_change_update_value(self):
+        if self.update_value and not valid_date(self.update_value, '%H:%M:%S %p'):
+            self.update_value = False
+            return {'warning': {
+                        'title': 'Error!',
+                        'message': 'Please enter the correct format!'}}
+            
+    @api.multi
+    def update_data(self):
+        if self.to_update == 'in':
+            duration = compute_hours_mins(self.update_value, self.view_out_time, '%H:%M:%S %p')
+            params = (duration, self.update_value, self.id)
+            sql_query = 'UPDATE hr_attendance SET view_hours = %s , view_in_time = %s WHERE id = %s'
+            self.env.cr.execute(sql_query, params)
+        elif self.to_update == 'out':
+            duration = compute_hours_mins(self.view_in_time, self.update_value, '%H:%M:%S %p')
+            params = (duration, self.update_value, self.id)
+            sql_query = 'UPDATE hr_attendance SET view_hours = %s , view_out_time = %s WHERE id = %s'
+            self.env.cr.execute(sql_query, params)
+        else:
+            self.update_value = False
+            raise UserError('Please select punch in/out to update!')
     
     @api.one
     @api.depends('employee_id')

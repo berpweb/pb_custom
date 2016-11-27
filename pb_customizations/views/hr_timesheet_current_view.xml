@@ -70,7 +70,7 @@
                     <xpath expr="//widget[@type='weekly_timesheet']/.." position="before">
                         <page string="Attendances Details" autofocus="autofocus">
                             <field name="attendances_ids">
-                                <tree string="Details">
+                                <tree string="Details" create="false" delete="false">
                                 	<field name="view_date" string="Date" readonly="1" />
                                 	<field name="view_in_time" string="In Time" readonly="1" />
                                 	<field name="punch_in_address" string="In Address" readonly="1" />
@@ -91,6 +91,17 @@
                                  			<field name="punch_out_address" readonly="1"/>
                                  		</group>
                                     </group>
+                                    <group>
+										<group>
+					                        <label for="to_update" string="To Update?" class="oe_edit_only"/>
+					                         <div class="oe_edit_only">
+					                               <field name="to_update" class="oe_inline"/>
+					                               <field name="update_value" class="oe_inline" placeholder="Enter the data"/>
+					                               <button name="update_data" class="oe_inline oe_highlight" 
+					                               		attrs="{'invisible':[('update_value','=',False)]}" string="Update" type="object" />
+					                         </div>
+					                    </group>
+									</group>
                                 </form>
                             </field>
                         </page>
