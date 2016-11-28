@@ -15,7 +15,7 @@ class HrEmployee(models.Model):
         self.user_id_rel = self.user_id.id
             
     @api.one
-    @api.constrains('user_id')
+    @api.constrains('user_id_rel')
     def _check_user_for_emp(self):
         if self.user_id and self.search([('user_id', '=', self.user_id.id), ('id', '!=', self.id)]).ids:
             raise ValidationError('You cannot assign same user to multiple employees.')
