@@ -49,6 +49,7 @@
 				<field name="vehicle_details" attrs="{'invisible':[('vehicle_details', '=', False)]}"/>
 				<field name="total_task_work_duration"/>
 				<field name="total_vehicle_work_duration"/>
+				<field name="rates_per_hr" string="Change Vehicle Rate?"/>
 				<field name="task_done" invisible="1"/>
 			</xpath>
 			<xpath expr="//field[@name='kanban_state']" position="attributes">

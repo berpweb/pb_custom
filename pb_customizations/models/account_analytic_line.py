@@ -17,7 +17,7 @@ class AccountAnalyticLine(models.Model):
     @api.multi
     @api.onchange('update_value')
     def on_change_update_value(self):
-        if self.update_value and not valid_date(self.update_value, '%m/%d/%Y %H:%M:%S %p'):
+        if self.update_value and not valid_date(self.update_value, '%m/%d/%Y %I:%M:%S %p'):
             self.update_value = False
             return {'warning': {
                         'title': 'Error!',
@@ -34,11 +34,11 @@ class AccountAnalyticLine(models.Model):
     @api.multi
     def update_data(self):
         if self.to_update == 'in':
-            duration = compute_hours_mins(self.update_value, self.task_stop_time, '%m/%d/%Y %H:%M:%S %p')
+            duration = compute_hours_mins(self.update_value, self.task_stop_time, '%m/%d/%Y %I:%M:%S %p')
             self.task_work_duration = duration
             self.task_start_time = self.update_value
         elif self.to_update == 'out':
-            duration = compute_hours_mins(self.task_start_time, self.update_value, '%m/%d/%Y %H:%M:%S %p')
+            duration = compute_hours_mins(self.task_start_time, self.update_value, '%m/%d/%Y %I:%M:%S %p')
             self.task_work_duration = duration
             self.task_stop_time = self.update_value
         else:

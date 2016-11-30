@@ -45,7 +45,12 @@
 						<strong>Rates Per Hour</strong>
 					</td>
 					<td class="text-center">
-						<span t-field="o.vehicle_details.rates_per_hr" />
+						<t t-if="o.rates_per_hr">
+							<span t-field="o.rates_per_hr" />
+						</t>
+						<t t-if="not o.rates_per_hr">
+							<span t-field="o.vehicle_details.rates_per_hr" />
+						</t>
 					</td>
 				</tr>
 				<tr>

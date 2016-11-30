@@ -44,6 +44,7 @@
                     </xpath>
                     <xpath expr="//field[@name='company_id']" position="after">
             			<field name="attendance_total_hours" string="Total Hours" />
+            			<field name="attendanceslip_run_id" string="Batch Name"/>
                     </xpath>
                     <xpath expr="//label[@for='date_from']" position="attributes">
                     	<attribute name="string">Attendance Period</attribute>
@@ -115,6 +116,9 @@
             <field name="model">hr_timesheet_sheet.sheet</field>
             <field name="inherit_id" ref="hr_timesheet_sheet.hr_timesheet_sheet_tree_simplified" />
             <field name="arch" type="xml">
+            		<field name="date_to" position="after">
+            			<field name="attendanceslip_run_id" string="Batch Name"/>
+            		</field>
                     <xpath expr="//field[@name='total_timesheet']" position="attributes">
                     	<attribute name="invisible">1</attribute>
                     </xpath>

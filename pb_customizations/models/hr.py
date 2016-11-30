@@ -55,7 +55,7 @@ class HrAttendance(models.Model):
     @api.multi
     @api.onchange('update_value')
     def on_change_update_value(self):
-        if self.update_value and not valid_date(self.update_value, '%H:%M:%S %p'):
+        if self.update_value and not valid_date(self.update_value, '%I:%M:%S %p'):
             self.update_value = False
             return {'warning': {
                         'title': 'Error!',
@@ -64,12 +64,12 @@ class HrAttendance(models.Model):
     @api.multi
     def update_data(self):
         if self.to_update == 'in':
-            duration = compute_hours_mins(self.update_value, self.view_out_time, '%H:%M:%S %p')
+            duration = compute_hours_mins(self.update_value, self.view_out_time, '%I:%M:%S %p')
             params = (duration, self.update_value, self.id)
             sql_query = 'UPDATE hr_attendance SET view_hours = %s , view_in_time = %s WHERE id = %s'
             self.env.cr.execute(sql_query, params)
         elif self.to_update == 'out':
-            duration = compute_hours_mins(self.view_in_time, self.update_value, '%H:%M:%S %p')
+            duration = compute_hours_mins(self.view_in_time, self.update_value, '%I:%M:%S %p')
             params = (duration, self.update_value, self.id)
             sql_query = 'UPDATE hr_attendance SET view_hours = %s , view_out_time = %s WHERE id = %s'
             self.env.cr.execute(sql_query, params)
@@ -93,7 +93,7 @@ class HrAttendance(models.Model):
     def _get_attendace_date(self):
         d = datetime.strptime(self.name, '%Y-%m-%d %H:%M:%S')
         day_string = d.strftime('%m/%d/%Y')
-        time_string = d.strftime('%H:%M:%S %p')
+        time_string = d.strftime('%I:%M:%S %p')
         self.view_date = day_string
         self.view_out_time = time_string
     

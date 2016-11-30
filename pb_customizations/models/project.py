@@ -30,6 +30,7 @@ class Task(models.Model):
     task_done = fields.Char(string="Task Done", default='notok')
     vehicle_details = fields.Many2one('vehicle.vehicle', string="Vehicle Name", copy=False)
     vehicle_name = fields.Char(related='vehicle_details.name')
+    rates_per_hr = fields.Char(string="Rates Per Hour")
     vehicle_number = fields.Char(related='vehicle_details.vehicle_number')
     vehicle_name_number = fields.Char(string="Vehicle Name Number", default='-', copy=False)
     is_sign_updated = fields.Char(string="Is Signature Updated?", default='-', copy=False)
