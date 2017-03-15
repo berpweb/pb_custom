@@ -31,8 +31,12 @@
                     <xpath expr="//field[@name='state']" position="attributes">
                     	<attribute name="invisible">1</attribute>
                     </xpath>
-					<xpath expr="//div[@name='button_box']" position="attributes">
-                       <attribute name="invisible">1</attribute>
+					<xpath expr="//div[@name='button_box']" position="inside">
+                        <button name="toggle_active" type="object"
+                                    class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button"
+                                    options='{"terminology": "archive"}'/>
+                        </button>
                     </xpath>
                     <xpath expr="//field[@name='total_difference']" position="attributes">
                     	<attribute name="invisible">1</attribute>

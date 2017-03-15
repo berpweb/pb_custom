@@ -6,6 +6,7 @@ class HrTimesheetSheet(models.Model):
     attendanceslip_run_id = fields.Many2one('generate.timesheet', 'Attendance Slip Batches', readonly=True, copy=False)
     attendance_total_hours = fields.Char(string="Total Hours", compute='_get_total_hours', 
                                      default='0:0', copy=False)
+    active = fields.Boolean(string="Active", default=True)
      
     @api.one
     @api.depends('attendances_ids')
