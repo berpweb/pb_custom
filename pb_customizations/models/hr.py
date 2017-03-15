@@ -44,6 +44,8 @@ class HrAttendance(models.Model):
     view_date = fields.Char(compute='_get_attendace_date', store=True, string="Date")
     view_out_time = fields.Char(compute='_get_attendace_date', store=True, string="Punch Out Time")
     update_value = fields.Char(string="Update Value", copy=False)
+    change_date_value = fields.Char(string="Update Value", copy=False)
+    change_date = fields.Selection([('change_date', 'Change Date?')], default='change_date', string="Change Date?")
     to_update = fields.Selection([('in', 'Punch In'),
                                   ('out', 'Punch Out')])
     
@@ -76,6 +78,29 @@ class HrAttendance(models.Model):
         else:
             self.update_value = False
             raise UserError('Please select punch in/out to update!')
+
+    @api.multi
+    @api.onchange('change_date_value')
+    def on_change_change_date_value(self):
+        if self.change_date_value and not valid_date(self.change_date_value, '%m/%d/%Y'):
+            self.change_date_value = False
+            return {'warning': {
+                'title': 'Error!',
+                'message': 'Please enter the correct format!'}}
+
+    @api.multi
+    def update_date_value(self):
+        if self.change_date == 'change_date':
+            # m,d,y = self.change_date_value.split('/')
+            # reordered_date = d,m,y
+            # date_format_store = '/'.join(reordered_date)
+            # params = (date_format_store, self.id)
+            params = (self.change_date_value, self.id)
+            sql_query = 'UPDATE hr_attendance SET view_date = %s WHERE id = %s'
+            self.env.cr.execute(sql_query, params)
+        else:
+            self.change_date_value = False
+            raise UserError('Please select change date to update!')
     
     @api.one
     @api.depends('employee_id')
