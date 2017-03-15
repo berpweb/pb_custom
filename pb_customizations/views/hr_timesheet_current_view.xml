@@ -49,6 +49,9 @@
                     <xpath expr="//label[@for='date_from']" position="attributes">
                     	<attribute name="string">Attendance Period</attribute>
                     </xpath>
+                    <xpath expr="//field[@name='date_from']" position="attributes">
+                    	<attribute name="readonly">0</attribute>
+                    </xpath>
                     <xpath expr="//div[@class='oe_chatter']" position="attributes">
                     	<attribute name="invisible">1</attribute>
                     </xpath>
@@ -94,19 +97,26 @@
                                     </group>
                                     <group>
 										<group>
-					                        <label for="to_update" string="To Update?" class="oe_edit_only"/>
+					                        <label for="to_update" string="Change Time?" class="oe_edit_only"/>
 					                         <div class="oe_edit_only">
 					                               <field name="to_update" class="oe_inline"/>
 					                               <field name="update_value" class="oe_inline" placeholder="Enter the data"/>
 					                               <button name="update_data" class="oe_inline oe_highlight" 
 					                               		attrs="{'invisible':[('update_value','=',False)]}" string="Update" type="object" />
 					                         </div>
-                                            <label for="change_date" string="Change Date?" class="oe_edit_only"/>
+                                             <label for="change_date" string="Change Date?" class="oe_edit_only"/>
 					                         <div class="oe_edit_only">
 					                               <field name="change_date" class="oe_inline"/>
 					                               <field name="change_date_value" class="oe_inline" placeholder="Enter the data"/>
 					                               <button name="update_date_value" class="oe_inline oe_highlight"
 					                               		attrs="{'invisible':[('change_date_value','=',False)]}" string="Update" type="object" />
+					                         </div>
+                                             <label for="location_type" string="Change Location?" class="oe_edit_only"/>
+					                         <div class="oe_edit_only">
+					                               <field name="location_type" class="oe_inline"/>
+					                               <field name="location_value" class="oe_inline" placeholder="Enter the data"/>
+					                               <button name="update_location" class="oe_inline oe_highlight"
+					                               		attrs="{'invisible':[('location_value','=',False)]}" string="Update" type="object" />
 					                         </div>
 					                    </group>
 									</group>

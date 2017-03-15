@@ -46,8 +46,9 @@ class HrAttendance(models.Model):
     update_value = fields.Char(string="Update Value", copy=False)
     change_date_value = fields.Char(string="Update Value", copy=False)
     change_date = fields.Selection([('change_date', 'Change Date?')], default='change_date', string="Change Date?")
-    to_update = fields.Selection([('in', 'Punch In'),
-                                  ('out', 'Punch Out')])
+    to_update = fields.Selection([('in', 'Punch In'), ('out', 'Punch Out')], default='in')
+    location_value = fields.Char(string="Enter location", copy=False)
+    location_type = fields.Selection([('in', 'Punch In?'), ('out', 'Punch Out?')], default='in', string="Location type?")
     
     def _altern_si_so(self, cr, uid, ids, context=None):
         return True
@@ -91,16 +92,26 @@ class HrAttendance(models.Model):
     @api.multi
     def update_date_value(self):
         if self.change_date == 'change_date':
-            # m,d,y = self.change_date_value.split('/')
-            # reordered_date = d,m,y
-            # date_format_store = '/'.join(reordered_date)
-            # params = (date_format_store, self.id)
             params = (self.change_date_value, self.id)
             sql_query = 'UPDATE hr_attendance SET view_date = %s WHERE id = %s'
             self.env.cr.execute(sql_query, params)
         else:
             self.change_date_value = False
             raise UserError('Please select change date to update!')
+
+    @api.multi
+    def update_location(self):
+        if self.location_type == 'in':
+            params = (self.location_value, self.id)
+            sql_query = 'UPDATE hr_attendance SET punch_in_address = %s WHERE id = %s'
+            self.env.cr.execute(sql_query, params)
+        elif self.location_type == 'out':
+            params = (self.location_value, self.id)
+            sql_query = 'UPDATE hr_attendance SET punch_out_address = %s WHERE id = %s'
+            self.env.cr.execute(sql_query, params)
+        else:
+            self.location_value = False
+            raise UserError('Please select location type to update!')
     
     @api.one
     @api.depends('employee_id')
@@ -116,9 +127,10 @@ class HrAttendance(models.Model):
     @api.one
     @api.depends('name')
     def _get_attendace_date(self):
-        d = datetime.strptime(self.name, '%Y-%m-%d %H:%M:%S')
-        day_string = d.strftime('%m/%d/%Y')
-        time_string = d.strftime('%I:%M:%S %p')
-        self.view_date = day_string
-        self.view_out_time = time_string
+        if self.name:
+            d = datetime.strptime(self.name, '%Y-%m-%d %H:%M:%S')
+            day_string = d.strftime('%m/%d/%Y')
+            time_string = d.strftime('%I:%M:%S %p')
+            self.view_date = day_string
+            self.view_out_time = time_string
     
