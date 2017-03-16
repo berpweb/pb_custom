@@ -19,6 +19,10 @@
     <menuitem name="Attendance Slips" id="menu_act_hr_timesheet_sheet_form_my_current" 
     	parent="attendance_details_menu" action="act_hr_timesheet_sheet_my_timesheets" 
     	groups="base.group_user" sequence="2"/>
+
+    <menuitem action="hr_attendance.open_view_attendance" id="menu_open_view_attendance"
+              parent="attendance_details_menu" sequence="20"
+              name="Attendance Master" groups="pb_customizations.attendance_master"/>
     
     <record id="hr_timesheet_sheet_form" model="ir.ui.view">
             <field name="name">hr.timesheet.sheet.form</field>

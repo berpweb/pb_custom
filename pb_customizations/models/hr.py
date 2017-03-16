@@ -54,6 +54,15 @@ class HrAttendance(models.Model):
         return True
     
     _constraints = [(_altern_si_so, 'Error ! Sign in (resp. Sign out) must follow Sign out (resp. Sign in)', ['action'])]
+
+    @api.model
+    def fields_get(self, *args, **kwargs):
+        fields_to_show = ['employee_id']
+        res = super(HrAttendance, self.sudo()).fields_get(*args, **kwargs)
+        for k in res.iterkeys():
+                if k not in fields_to_show:
+                    res[k]['selectable'] = False
+        return res
     
     @api.multi
     @api.onchange('update_value')
